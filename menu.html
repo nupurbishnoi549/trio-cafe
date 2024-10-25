@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+    <title>Cafe Menu</title>
+    <meta name="title" content="Cafe Menu" />
+    <meta name="description" content="Good things come in threes—like coffee, friends, and naps." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property=" og:type" content="website" />
+    <meta property="og:url" content="https://metatags.io/" />
+    <meta property="og:title" content="Cafe Menu" />
+    <meta property="og:description" content="Good things come in threes—like coffee, friends, and naps."/>
+    <meta property=" og:image" content="/meta-img.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://metatags.io/" />
+    <meta property="twitter:title" content="Cafe Menu" />
+    <meta property="twitter:description" content="Good things come in threes—like coffee, friends, and naps."/>
+    <meta property=" twitter:image" content="/meta-img.jpg" />
+    
+    <!-- Meta Tags Generated with https://metatags.io -->
+    <style>
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+        }
+
+        .menu-list {
+            width: 250px;
+            background-color: #333333;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            height: 100vh;
+        }
+
+        .cafe-menu {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        .all-menu {
+            color: #dddddd;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+            transition: background 0.3s ease;
+        }
+
+        .all-menu:hover {
+            background-color: gray;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        .menu-section {
+            display: none;
+        }
+
+        .menu-section.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .menu-item {
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .item-name {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .item-detail {
+            color: gray;
+            margin-bottom: 10px;
+        }
+
+        .menu-item .price {
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .add-to-cart:hover {
+            background-color: #218838;
+        }
+
+        .cart {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .your-cart {
+            margin-top: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .payment-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100px;
+        }
+
+        .payment-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu-list">
+        <h2 class="cafe-menu">Café Menu</h2>
+        <a href="#" onclick="showSection('drinks')" class="all-menu">Drinks</a>
+        <a href="#" onclick="showSection('meals')" class="all-menu">Meals</a>
+        <a href="#" onclick="showSection('desserts')" class="all-menu">Desserts</a>
+        <a href="#" onclick="showSection('mocktails')" class="all-menu">Mocktails</a>
+    </div>
+    <div class="content">
+        <div id="drinks" class="menu-section active">
+            <div class="menu-item">
+                <img src="./assets/images/webp/starbucks-coffe.avif" alt="Coffee" class="item-image">
+                <h3 class="item-name">Coffee</h3>
+                <p class="item-detail">Rich and aromatic brew.</p>
+                <div class="price">Price: 399</div>
+                <button class="add-to-cart" onclick="addToCart('Coffee', 399)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/green-tea.webp" alt="Tea" class="item-image">
+                <h3 class="item-name">Green Tea</h3>
+                <p class="item-detail">Fresh and energizing.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Green Tea', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/fruit-smoothie.webp" alt="Smoothie" class="item-image">
+                <h3 class="item-name">Fruit Smoothie</h3>
+                <p class="item-detail">Blended with fresh fruits.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Fruit Smoothie', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/chocolate-milkshake.webp" alt="chocolate-milkshake" class="item-image">
+                <h3 class="item-name">Chocolate Milkshake</h3>
+                <p class="item-detail">Creamy chocolate ice cream delight.</p>
+                <div class="price">Price: 349</div>
+                <button class="add-to-cart" onclick="addToCart('Chocolate Milkshake', 349)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/vanilla-iced-coffee.webp" alt="iced-coffee" class="item-image">
+                <h3 class="item-name">Vanilla Iced Coffee</h3>
+                <p class="item-detail">Chilled coffee with vanilla flavor.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Vanilla Iced Coffee', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/tea-img.webp" alt="chai-latte" class="item-image">
+                <h3 class="item-name">Spiced Chai Latte</h3>
+                <p class="item-detail">Chai with warm spices and milk.</p>
+                <div class="price">Price: 49</div>
+                <button class="add-to-cart" onclick="addToCart('Spiced Chai Latte', 49)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/pineapple-coconut-smoothie.webp" alt="pineapple-coconut-smoothie"
+                    class="item-image">
+                <h3 class="item-name">Pineapple Coconut Smoothie</h3>
+                <p class="item-detail">Tropical blend of pineapple and coconut.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Pineapple Coconut Smoothie', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/blackberry-lemon-fizz.webp" alt="blackberry-lemon-fizz" class="item-image">
+                <h3 class="item-name">Blackberry Lemon Fizz</h3>
+                <p class="item-detail">Bubbly lemonade with blackberry twist.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Blackberry Lemon Fizz', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/caramel-frappuccino.webp" alt="caramel-frappuccino" class="item-image">
+                <h3 class="item-name">Caramel Frappuccino</h3>
+                <p class="item-detail">Iced coffee blended with caramel.</p>
+                <div class="price">Price: 349</div>
+                <button class="add-to-cart" onclick="addToCart('Caramel Frappuccino', 349)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/hazelnut-hot-chocolate.webp" alt="hazelnut-hot-chocolate" class="item-image">
+                <h3 class="item-name">Hazelnut Hot Chocolate</h3>
+                <p class="item-detail">Rich chocolate with hazelnut essence.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Hazelnut Hot Chocolate', 299)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div id="meals" class="menu-section">
+            <div class="menu-item">
+                <img src="./assets/images/webp/golgappe.webp" alt="golgappe" class="item-image">
+                <h3 class="item-name">Golgape</h3>
+                <p class="item-detail">Crispy puris topped with spiced yogurt</p>
+                <div class="price">Price: 99</div>
+                <button class="add-to-cart" onclick="addToCart('Golgappe', 99)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/classic-burger.webp" alt="Burger" class="item-image">
+                <h3 class="item-name">Classic Burger</h3>
+                <p class="item-detail">Beef patty with fresh toppings.</p>
+                <div class="price">Price: 149</div>
+                <button class="add-to-cart" onclick="addToCart('Burger', 149)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/tacos-ai-pastor.webp" alt="tacos-ai-pastor" class="item-image">
+                <h3 class="item-name">Tacos Al Pastor</h3>
+                <p class="item-detail">Flavorful marinated jackfruit.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Tacos Ai Pastor', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/paneer-tikka-masala.webp" alt="paneer-tikka-masala" class="item-image">
+                <h3 class="item-name">Paneer Tikka Masala</h3>
+                <p class="item-detail">Grilled paneer in a creamy sauce.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Paneer Tikka Masala', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/thai-green-curry.webp" alt="thai-green-curry" class="item-image">
+                <h3 class="item-name">Thai Green Curry</h3>
+                <p class="item-detail">A spicy coconut milk-based curry.</p>
+                <div class="price">Price: 399</div>
+                <button class="add-to-cart" onclick="addToCart('Thai Green Curry', 399)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/pav-bhaji.webp" alt="pav-bhaji" class="item-image">
+                <h3 class="item-name">Pav Bhaji</h3>
+                <p class="item-detail">Spiced veggie mash with bread.</p>
+                <div class="price">Price: 149</div>
+                <button class="add-to-cart" onclick="addToCart('Pav Bhaji', 149)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/masala-dosa.webp" alt="masala-dosa" class="item-image">
+                <h3 class="item-name">Masala Dosa</h3>
+                <p class="item-detail">Crispy rice crepe filled with potato.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Masala Dosa', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/panneer-tikka-wrap.webp" alt="panneer-tikka-wrap" class="item-image">
+                <h3 class="item-name">Paneer Tikka Wrap:</h3>
+                <p class="item-detail">Grilled paneer tikka, wrapped.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Panneer Tikka Wrap', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/pamimi-sandwitch.webp" alt="grilled-veggie-panini" class="item-image">
+                <h3 class="item-name">Grilled Veggie Panini:</h3>
+                <p class="item-detail">sandwich with roasted vegetables.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Grilled Veggie Panini', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/chola-bhatura.webp" alt="chola-bhatura" class="item-image">
+                <h3 class="item-name">Chole Bhature</h3>
+                <p class="item-detail">Spicy chickpeas served with fluffy bread.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Chola Bhatura', 199)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div id="desserts" class="menu-section">
+            <div class="menu-item">
+                <img src="./assets/images/webp/red-velvet-cake.webp" alt="red-velvet-cake" class="item-image">
+                <h3 class="item-name">Red velvet Cake</h3>
+                <p class="item-detail">Moist cake with cream cheese frosting.</p>
+                <div class="price">Price: 999</div>
+                <button class="add-to-cart" onclick="addToCart('Red Velvet Cake', 999)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/ice-cream.webp" alt="Ice Cream" class="item-image">
+                <h3 class="item-name">Ice Cream</h3>
+                <p class="item-detail">Refreshing ice cream in various flavors.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Ice Cream', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/ras-malai.webp" alt="ras-malai" class="item-image">
+                <h3 class="item-name">Ras Malai</h3>
+                <p class="item-detail">Soft paneer soaked in flavored milk.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Ras Malai', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/apple-pie.webp" alt="Pie" class="item-image">
+                <h3 class="item-name">Apple Pie</h3>
+                <p class="item-detail">Warm spiced apples in a flaky crust.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Pie', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/baklava.webp" alt="baklava" class="item-image">
+                <h3 class="item-name">Baklava</h3>
+                <p class="item-detail">Flaky pastry with honeyed nuts.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Baklava', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/creamy-brulee.webp" alt="creamy-brulee" class="item-image">
+                <h3>Creme Brulee</h3>
+                <p class="item-detail">Creamy custard with caramelized top.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Creme Brulee', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/chocolate-lava-cake.webp" alt="chocolate-lava-cake" class="item-image">
+                <h3 class="item-name">Chocolate Lava Cake</h3>
+                <p class="item-detail">Warm cake with molten center.</p>
+                <div class="price">Price: 399</div>
+                <button class="add-to-cart" onclick="addToCart('Chocolate Lava Cake', 1299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/panna-cotta.webp" alt="panna-cotta" class="item-image">
+                <h3 class="item-name">Panna Cotta</h3>
+                <p class="item-detail">Silky custard with berry topping.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Panna Cotta', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/gulab-jamun.webp" alt="gulab-jamun" class="item-image">
+                <h3 class="item-name">Gulab Jamun</h3>
+                <p class="item-detail">Sweet syrup-soaked milk dumplings.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Gulab Jamun', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/tiramisu.webp" alt="tiramisu" class="item-image">
+                <h3 class="item-name">Tiramisu</h3>
+                <p class="item-detail">Coffee-soaked layers with cream.</p>
+                <div class="price">Price: 399</div>
+                <button class="add-to-cart" onclick="addToCart('Tiramisu', 399)">Add to Cart</button>
+            </div>
+        </div>
+
+        <div id="mocktails" class="menu-section">
+            <div class="menu-item">
+                <img src="./assets/images/webp/mango-lassi.webp" alt="Mango Lassi" class="item-image">
+                <h3 class="item-name">Mango Lassi</h3>
+                <p class="item-detail">Creamy drink blended with mango.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Mango Lassi', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/virgin-mojito.webp" alt="Virgin Mojito" class="item-image">
+                <h3 class="item-name">Virgin Mojito</h3>
+                <p class="item-detail">Refreshing mint and lime beverage.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Virgin Mojito', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/pina-colada.webp" alt="Pina Colada" class="item-image">
+                <h3 class="item-name">Pina Colada</h3>
+                <p class="item-detail">Tropical mix of pineapple and coconut.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Pina Colada', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/blue-lagoon.webp" alt="Blue Lagoon" class="item-image">
+                <h3 class="item-name">Blue Lagoon</h3>
+                <p class="item-detail">A vibrant blue citrus drink.</p>
+                <div class="price">Price: 349</div>
+                <button class="add-to-cart" onclick="addToCart('Blue Lagoon', 349)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/strawberry-smoothie.webp" alt="Strawberry Smoothie" class="item-image">
+                <h3 class="item-name">Strawberry Smoothie</h3>
+                <p class="item-detail">Smooth blend of strawberries and yogurt.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Strawberry Smoothie', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/fruit-punch.webp" alt="Fruit Punch" class="item-image">
+                <h3 class="item-name">Fruit Punch</h3>
+                <p class="item-detail">A delightful mix of various fruits.</p>
+                <div class="price">Price: 299</div>
+                <button class="add-to-cart" onclick="addToCart('Fruit Punch', 299)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/cucumber-cooler.webp" alt="Cucumber Cooler" class="item-image">
+                <h3 class="item-name">Cucumber Cooler</h3>
+                <p class="item-detail">Cool refreshing drink with cucumber.</p>
+                <div class="price">Price: 249</div>
+                <button class="add-to-cart" onclick="addToCart('Cucumber Cooler', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/apple-fizz.webp" alt="Apple Fizz" class="item-image">
+                <h3 class="item-name">Apple Fizz</h3>
+                <p class="item-detail">Sparkling apple juice with a twist.</p>
+                <div class="price">Price: 199</div>
+                <button class="add-to-cart" onclick="addToCart('Apple Fizz', 199)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/kiwi-lime-sparkler.webp" alt="Kiwi Lime Sparkler" class="item-image">
+                <h3 class="item-name">Kiwi Lime Sparkler</h3>
+                <p class="item-detail">Zesty kiwi and lime drink.</p>
+                <div class="price">Price: 499</div>
+                <button class="add-to-cart" onclick="addToCart('Kiwi Lime Sparkler', 499)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="./assets/images/webp/raspberry-soda.webp" alt="Raspberry Soda" class="item-image">
+                <h3 class="item-name">Raspberry Soda</h3>
+                <p class="item-detail">Sweet and tangy raspberry soda.</p>
+                <div class="price">Price: 229</div>
+                <button class="add-to-cart" onclick="addToCart('Raspberry Soda', 229)">Add to Cart</button>
+            </div>
+        </div>
+        <div class="cart">
+            <h3 class="your-cart">Your Cart</h3>
+            <div id="cart-items"></div>
+            <div class="cart-total" id="cart-total">Total: 0.00</div>
+            <button class="payment-button" id="payment-button" onclick="makePayment()" style="display: none;">Pay
+                Now</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let totalPrice = 0;
+        function showSection(section) {
+            const sections = document.querySelectorAll('.menu-section');
+            sections.forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(section).classList.add('active');
+        }
+        function addToCart(itemName, price) {
+            cart.push({ name: itemName, price: price });
+            totalPrice += price;
+            updateCart();
+        }
+        function updateCart() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `${item.name} - ${item.price.toFixed(2)}`;
+                cartItemsContainer.appendChild(div);
+            });
+            document.getElementById('cart-total').innerHTML = `Total: ${totalPrice.toFixed(2)}`;
+            document.getElementById('payment-button').style.display = cart.length > 0 ? 'block' : 'none';
+        }
+        function makePayment() {
+            if (cart.length > 0) {
+                alert(`Payment successful! Total: ${totalPrice.toFixed(2)}`);
+                cart = [];
+                totalPrice = 0;
+                updateCart();
+            } else {
+                alert("Your cart is empty.");
+            }
+        }
+    </script>
+</body>
+
+</html>
